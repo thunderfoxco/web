@@ -12,12 +12,37 @@
         id="logo"
         src="assets/thunderfox.svg?logo"
         srcset="
-          assets/thunderfox-4x.png 4x
-          assets/thunderfox-3x.png 3x
-          assets/thunderfox-2x.png 2x
+          assets/thunderfox-4x.png 4x,
+          assets/thunderfox-3x.png 3x,
+          assets/thunderfox-2x.png 2x,
           assets/thunderfox-1x.png 1x
         "
       />
     </div>
   </body>
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      const colors = ['red', 'green', 'blue', 'orange'];
+      const container = document.querySelector('#container')
+      let currentColor = getRandomColor();
+
+      function getRandomColor() {
+        return colors[Math.floor(Math.random() * colors.length)];
+      }
+
+      function setColor() {
+        let next = getRandomColor();
+        if (next === currentColor) {
+          return setColor();
+        }
+
+        currentColor = next;
+        container.style.backgroundColor = `var(--${currentColor})`;
+      }
+
+      container.addEventListener('click', setColor);
+      setColor()
+    });
+
+  </script>
 </html>
